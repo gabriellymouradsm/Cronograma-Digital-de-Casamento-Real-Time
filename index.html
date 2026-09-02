@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronograma Digital de Casamento Real-Time</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FAF8F5">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
@@ -31,12 +34,6 @@
                             700: '#725542',
                             800: '#5A4335',
                             900: '#3D2D24',
-                        },
-                        rosegold: {
-                            100: '#FDF1EE',
-                            200: '#F8DED7',
-                            500: '#C88A78',
-                            600: '#B07160',
                         }
                     }
                 }
@@ -67,15 +64,42 @@
 <body class="min-h-screen pb-12 antialiased selection:bg-wedding-200 selection:text-wedding-900">
 
     <div class="max-w-md mx-auto px-4 py-6 sm:max-w-xl">
-        <!-- Header -->
-        <header class="text-center mb-6">
-            <div class="inline-flex items-center justify-center space-x-2 mb-1">
-                <span class="text-wedding-500 text-sm tracking-widest uppercase font-semibold">Cerimonial & Assessoria</span>
+        <!-- Hero Header (inspired by design mockup) -->
+        <header class="relative rounded-3xl bg-gradient-to-br from-wedding-800 via-wedding-900 to-wedding-800 text-white p-6 mb-6 shadow-xl overflow-hidden">
+            <div class="absolute -right-6 -top-6 w-32 h-32 bg-wedding-500/10 rounded-full blur-2xl"></div>
+            <div class="relative z-10">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-[10px] tracking-widest uppercase font-semibold text-wedding-300 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">
+                        Cerimonial em Tempo Real
+                    </span>
+                    <button id="undo-btn" onclick="undoLastAction()" disabled title="Desfazer última alteração" class="p-1.5 text-wedding-300 hover:text-white bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10 rounded-xl transition-all flex items-center gap-1 text-xs font-medium">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                        </svg>
+                        <span>Desfazer</span>
+                    </button>
+                </div>
+                <p class="text-xs italic text-wedding-200 mb-1">Nosso Grande Dia</p>
+                <h1 class="text-3xl sm:text-4xl font-cormorant font-bold tracking-tight text-white mb-4">
+                    Mariana & Lucas
+                </h1>
+
+                <!-- Status bar overview inside header -->
+                <div class="grid grid-cols-3 gap-2 bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/10 text-center">
+                    <div>
+                        <span class="block text-[10px] text-wedding-200 uppercase font-semibold">Total</span>
+                        <span id="header-total-count" class="text-sm font-bold text-white">0</span>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] text-wedding-200 uppercase font-semibold">Concluídos</span>
+                        <span id="header-completed-count" class="text-sm font-bold text-wedding-300">0</span>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] text-wedding-200 uppercase font-semibold">Restantes</span>
+                        <span id="header-remaining-count" class="text-sm font-bold text-white">0</span>
+                    </div>
+                </div>
             </div>
-            <h1 class="text-3xl sm:text-4xl font-cormorant font-bold text-wedding-900 tracking-tight">
-                Cronograma do Casamento
-            </h1>
-            <p class="text-xs text-wedding-600 mt-1">Acompanhamento em tempo real do dia do evento</p>
         </header>
 
         <!-- Progress Indicator Card -->
@@ -109,55 +133,55 @@
                 <span class="text-[10px] text-wedding-500">Aplica aos pendentes</span>
             </div>
             <div class="grid grid-cols-3 gap-2">
-                <button onclick="applyDelay(5)" class="py-2 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
+                <button onclick="applyDelay(5)" class="py-2.5 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
                     <span>+5 min</span>
                 </button>
-                <button onclick="applyDelay(15)" class="py-2 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
+                <button onclick="applyDelay(15)" class="py-2.5 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
                     <span>+15 min</span>
                 </button>
-                <button onclick="applyDelay(30)" class="py-2 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
+                <button onclick="applyDelay(30)" class="py-2.5 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
                     <span>+30 min</span>
                 </button>
             </div>
         </section>
 
         <!-- Dynamic View Filters -->
-        <section class="flex items-center justify-between bg-white rounded-xl p-1.5 border border-wedding-100 shadow-sm mb-5">
-            <button id="filter-all" onclick="setFilter('all')" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all text-wedding-900 bg-wedding-100 font-semibold">
+        <section class="flex items-center justify-between bg-white rounded-2xl p-1.5 border border-wedding-100 shadow-sm mb-5">
+            <button id="filter-all" onclick="setFilter('all')" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all text-wedding-900 bg-wedding-100">
                 Ver Tudo
             </button>
-            <button id="filter-pending" onclick="setFilter('pending')" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all text-wedding-600 hover:text-wedding-900">
+            <button id="filter-pending" onclick="setFilter('pending')" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all text-wedding-600 hover:text-wedding-900">
                 Pendentes
             </button>
-            <button id="filter-completed" onclick="setFilter('completed')" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all text-wedding-600 hover:text-wedding-900">
+            <button id="filter-completed" onclick="setFilter('completed')" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all text-wedding-600 hover:text-wedding-900">
                 Concluídos
             </button>
         </section>
 
         <!-- Add Milestone Form Toggle / Container -->
         <section class="mb-6">
-            <button id="toggle-add-form-btn" onclick="toggleAddForm()" class="w-full py-3 px-4 bg-wedding-800 hover:bg-wedding-900 text-white font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 active:scale-[0.99]">
+            <button id="toggle-add-form-btn" onclick="toggleAddForm()" class="w-full py-3.5 px-4 bg-wedding-800 hover:bg-wedding-900 text-white font-semibold text-xs rounded-2xl shadow-sm transition-all flex items-center justify-center gap-2 active:scale-[0.99]">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
                 <span>Novo Marco</span>
             </button>
 
-            <form id="add-milestone-form" onsubmit="handleAddMilestone(event)" class="hidden bg-white p-4 rounded-2xl border border-wedding-200 shadow-md mt-3 animate-fade-in space-y-3">
+            <form id="add-milestone-form" onsubmit="handleAddMilestone(event)" class="hidden bg-white p-5 rounded-2xl border border-wedding-200 shadow-md mt-3 animate-fade-in space-y-3">
                 <h3 class="text-sm font-bold text-wedding-800 border-b border-wedding-100 pb-2">Adicionar Novo Marco</h3>
                 <div>
                     <label for="milestone-time" class="block text-xs font-medium text-wedding-700 mb-1">Horário</label>
-                    <input type="time" id="milestone-time" required class="w-full px-3 py-2 text-sm border border-wedding-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wedding-400 bg-wedding-50">
+                    <input type="time" id="milestone-time" required class="w-full px-3 py-2 text-sm border border-wedding-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-wedding-400 bg-wedding-50">
                 </div>
                 <div>
                     <label for="milestone-title" class="block text-xs font-medium text-wedding-700 mb-1">Descrição do Marco</label>
-                    <input type="text" id="milestone-title" placeholder="Ex: Entrada dos Padrinhos" required class="w-full px-3 py-2 text-sm border border-wedding-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wedding-400 bg-wedding-50">
+                    <input type="text" id="milestone-title" placeholder="Ex: Entrada dos Padrinhos" required class="w-full px-3 py-2 text-sm border border-wedding-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-wedding-400 bg-wedding-50">
                 </div>
                 <div class="flex items-center gap-2 pt-1">
-                    <button type="submit" class="flex-1 py-2 bg-wedding-700 hover:bg-wedding-800 text-white text-xs font-semibold rounded-lg transition-all">
-                        Salvar
+                    <button type="submit" class="flex-1 py-2.5 bg-wedding-700 hover:bg-wedding-800 text-white text-xs font-semibold rounded-xl transition-all">
+                        Salvar Marco
                     </button>
-                    <button type="button" onclick="toggleAddForm(false)" class="py-2 px-4 bg-wedding-100 hover:bg-wedding-200 text-wedding-800 text-xs font-semibold rounded-lg transition-all">
+                    <button type="button" onclick="toggleAddForm(false)" class="py-2.5 px-4 bg-wedding-100 hover:bg-wedding-200 text-wedding-800 text-xs font-semibold rounded-xl transition-all">
                         Cancelar
                     </button>
                 </div>
@@ -177,6 +201,48 @@
         </footer>
     </div>
 
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-wedding-200 animate-fade-in">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-base font-bold text-wedding-900">Editar Marco</h3>
+                <button onclick="closeEditModal()" class="text-wedding-400 hover:text-wedding-700 p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form onsubmit="handleSaveEdit(event)" class="space-y-4">
+                <input type="hidden" id="edit-milestone-id">
+                <div>
+                    <label for="edit-milestone-time" class="block text-xs font-semibold text-wedding-700 mb-1">Horário</label>
+                    <input type="time" id="edit-milestone-time" required class="w-full px-3 py-2 text-sm border border-wedding-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-wedding-400 bg-wedding-50">
+                </div>
+                <div>
+                    <label for="edit-milestone-title" class="block text-xs font-semibold text-wedding-700 mb-1">Descrição</label>
+                    <input type="text" id="edit-milestone-title" required class="w-full px-3 py-2 text-sm border border-wedding-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-wedding-400 bg-wedding-50">
+                </div>
+                <div class="flex items-center gap-2 pt-2">
+                    <button type="submit" class="flex-1 py-2.5 bg-wedding-800 hover:bg-wedding-900 text-white font-semibold text-xs rounded-xl shadow-sm">
+                        Salvar Alterações
+                    </button>
+                    <button type="button" onclick="closeEditModal()" class="py-2.5 px-4 bg-wedding-100 hover:bg-wedding-200 text-wedding-800 font-semibold text-xs rounded-xl">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('SW registrado:', reg.scope))
+                    .catch(err => console.log('SW falhou:', err));
+            });
+        }
+    </script>
 </body>
 </html>
