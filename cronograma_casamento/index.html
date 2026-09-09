@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coloque os dados do casal</title>
+
+    <style>
+        body {
+            background-color: #f7f5f2;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+
+            box-sizing: border-box;
+        }
+
+        .card-formulario {
+            background-color: #3b2a22;
+
+            width: 100%;
+            max-width: 625px;
+
+            padding: 50px;
+
+            border-radius: 30px;
+
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+            box-sizing: border-box;
+
+            color: #ffffff;
+        }
+
+        .card-formulario h1 {
+            font-family: Georgia, serif;
+
+            font-size: 34px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            margin-top: 0;
+            margin-bottom: 38px;
+        }
+
+        .campo-grupo {
+            margin-bottom: 25px;
+        }
+
+        .campo-grupo label {
+            display: block;
+
+            font-size: 17px;
+
+            margin-bottom: 10px;
+
+            font-weight: 500;
+        }
+
+        .campo-grupo input {
+            width: 100%;
+
+            padding: 16px;
+
+            background-color: transparent;
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            border-radius: 10px;
+
+            color: #ffffff;
+
+            font-size: 18px;
+
+            box-sizing: border-box;
+
+            outline: none;
+
+            transition: border-color 0.2s;
+        }
+
+        .campo-grupo input:focus {
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .campo-grupo input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-enviar {
+            width: 100%;
+
+            padding: 17px;
+
+            background-color: #f7f5f2;
+
+            border: none;
+
+            border-radius: 30px;
+
+            color: #3b2a22;
+
+            font-size: 20px;
+
+            font-weight: 500;
+
+            cursor: pointer;
+
+            margin-top: 15px;
+            margin-bottom: 18px;
+
+            transition: 0.2s;
+        }
+
+        .btn-enviar:hover {
+            background-color: #eadecc;
+
+            transform: translateY(-1px);
+        }
+
+        .rodape-texto {
+            font-size: 12px;
+
+            color: rgba(255, 255, 255, 0.6);
+
+            text-align: center;
+
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .card-formulario {
+                padding: 30px 25px;
+            }
+
+            .card-formulario h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card-formulario">
+
+        <h1>Coloque os dados do casal:</h1>
+
+        <div class="campo-grupo">
+
+            <label for="nomeCasal">
+                Primeiro nome do casal
+            </label>
+
+            <input
+                type="text"
+                id="nomeCasal"
+                autocomplete="off"
+                placeholder="Digite o nome"
+                required
+            >
+
+        </div>
+
+        <div class="campo-grupo">
+
+            <label for="dataCasamento">
+                Data do casamento
+            </label>
+
+            <input
+                type="text"
+                id="dataCasamento"
+                placeholder="DD/MM/AAAA"
+                maxlength="10"
+                autocomplete="off"
+                required
+            >
+
+        </div>
+
+        <div class="campo-grupo">
+
+            <label for="horarioCasamento">
+                Horário
+            </label>
+
+            <input
+                type="text"
+                id="horarioCasamento"
+                placeholder="HH:MM"
+                maxlength="5"
+                autocomplete="off"
+                required
+            >
+
+        </div>
+
+        <button
+            class="btn-enviar"
+            onclick="salvarEAvancar()"
+        >
+            Novo Casal
+        </button>
+
+        <p class="rodape-texto">
+            Seu nome de perfil no Canva será compartilhado.
+            Nunca envie senhas.
+        </p>
+
+    </div>
+
+
+    <script>
+
+        // ==========================================
+        // MÁSCARA DA DATA
+        // ==========================================
+
+        document
+            .getElementById("dataCasamento")
+            .addEventListener("input", function (e) {
+
+                let valor = e.target.value
+                    .replace(/\D/g, "")
+                    .slice(0, 8);
+
+                if (valor.length >= 5) {
+
+                    valor =
+                        valor.slice(0, 2) +
+                        "/" +
+                        valor.slice(2, 4) +
+                        "/" +
+                        valor.slice(4);
+
+                } else if (valor.length >= 3) {
+
+                    valor =
+                        valor.slice(0, 2) +
+                        "/" +
+                        valor.slice(2);
+
+                }
+
+                e.target.value = valor;
+
+            });
+
+
+        // ==========================================
+        // MÁSCARA DO HORÁRIO
+        // ==========================================
+
+        document
+            .getElementById("horarioCasamento")
+            .addEventListener("input", function (e) {
+
+                let valor = e.target.value
+                    .replace(/\D/g, "")
+                    .slice(0, 4);
+
+                if (valor.length >= 3) {
+
+                    valor =
+                        valor.slice(0, 2) +
+                        ":" +
+                        valor.slice(2);
+
+                }
+
+                e.target.value = valor;
+
+            });
+
+
+        // ==========================================
+        // SALVAR OS DADOS
+        // ==========================================
+
+        function salvarEAvancar() {
+
+            const nome =
+                document
+                    .getElementById("nomeCasal")
+                    .value
+                    .trim();
+
+            const data =
+                document
+                    .getElementById("dataCasamento")
+                    .value
+                    .trim();
+
+            const horario =
+                document
+                    .getElementById("horarioCasamento")
+                    .value
+                    .trim();
+
+
+            // Verifica se os campos estão preenchidos
+
+            if (
+                !nome ||
+                data.length !== 10 ||
+                horario.length !== 5
+            ) {
+
+                alert(
+                    "Por favor, preencha todos os campos corretamente."
+                );
+
+                return;
+            }
+
+
+            // ==========================================
+            // SALVA NO LOCALSTORAGE
+            // ==========================================
+
+            localStorage.setItem(
+                "casal_nome",
+                nome
+            );
+
+            localStorage.setItem(
+                "casal_data",
+                data
+            );
+
+            localStorage.setItem(
+                "casal_horario",
+                horario
+            );
+
+
+            // ==========================================
+            // VAI PARA A PRÓXIMA PÁGINA
+            // ==========================================
+
+            window.location.href =
+                "proxima_pagina.html";
+        }
+
+    </script>
+
+</body>
+</html>

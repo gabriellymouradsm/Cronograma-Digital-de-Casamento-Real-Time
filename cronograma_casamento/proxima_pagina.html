@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Painel de Controle - Casamento</title>
+
+
+    <style>
+
+        /* ==========================================
+           CONFIGURAÇÃO GERAL
+        ========================================== */
+
+        body {
+
+            background-color: #f7f5f2;
+
+            font-family:
+                'Helvetica Neue',
+                Arial,
+                sans-serif;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100vh;
+
+            margin: 0;
+
+            padding: 20px;
+
+            box-sizing: border-box;
+        }
+
+
+        /* ==========================================
+           GRID PRINCIPAL
+        ========================================== */
+
+        .dashboard-container {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr 1fr;
+
+            gap: 20px;
+
+            width: 100%;
+
+            max-width: 1200px;
+        }
+
+
+        /* ==========================================
+           CARTÃO DE INFORMAÇÕES
+        ========================================== */
+
+        .card-resultado {
+
+            background-color: #3b2a22;
+
+            padding: 30px;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 8px 24px
+                rgba(0, 0, 0, 0.15);
+
+            color: #ffffff;
+
+            text-align: center;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+        }
+
+
+        .card-resultado h1 {
+
+            font-family: Georgia, serif;
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            margin-top: 0;
+
+            margin-bottom: 5px;
+        }
+
+
+        .subtitulo {
+
+            font-size: 14px;
+
+            color:
+                rgba(255, 255, 255, 0.7);
+
+            margin-bottom: 25px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* ==========================================
+           DADOS DO CASAL
+        ========================================== */
+
+        .dados-container {
+
+            background-color:
+                rgba(255, 255, 255, 0.05);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.1);
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+
+            text-align: left;
+        }
+
+
+        .dado-bloco {
+
+            margin-bottom: 18px;
+        }
+
+
+        .dado-bloco:last-child {
+
+            margin-bottom: 0;
+        }
+
+
+        .rotulo {
+
+            font-size: 12px;
+
+            color:
+                rgba(255, 255, 255, 0.5);
+
+            text-transform: uppercase;
+
+            display: block;
+
+            margin-bottom: 5px;
+        }
+
+
+        .valor {
+
+            font-size: 20px;
+
+            font-weight: 500;
+
+            color: #ffffff;
+
+            word-break: break-word;
+        }
+
+
+        /* ==========================================
+           CONTAGEM REGRESSIVA
+        ========================================== */
+
+        .regressiva-container {
+
+            background-color:
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .regressiva-titulo {
+
+            font-size: 12px;
+
+            color:
+                rgba(255, 255, 255, 0.6);
+
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+        }
+
+
+        .cronometro {
+
+            display: flex;
+
+            justify-content: space-around;
+
+            gap: 10px;
+        }
+
+
+        .tempo-unidade {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+
+        .tempo-numero {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #eadecc;
+        }
+
+
+        .tempo-rotulo {
+
+            font-size: 12px;
+
+            color:
+                rgba(255, 255, 255, 0.5);
+        }
+
+
+        /* ==========================================
+           BOTÃO WHATSAPP
+        ========================================== */
+
+        .btn-compartilhar {
+
+            width: 100%;
+
+            padding: 15px;
+
+            background-color: #25D366;
+
+            border: none;
+
+            border-radius: 30px;
+
+            color: #ffffff;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-bottom: 12px;
+
+            transition: 0.2s;
+        }
+
+
+        .btn-compartilhar:hover {
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ==========================================
+           BOTÃO EDITAR
+        ========================================== */
+
+        .btn-voltar {
+
+            width: 100%;
+
+            padding: 13px;
+
+            background-color: transparent;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.3);
+
+            border-radius: 30px;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .btn-voltar:hover {
+
+            background-color:
+                rgba(255, 255, 255, 0.08);
+        }
+
+
+        /* ==========================================
+           MÓDULOS
+        ========================================== */
+
+        .coluna-modulos {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+
+        .menu-bloco {
+
+            background-color: #3b2a22;
+
+            border-radius: 24px;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            padding: 30px 20px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 24px
+                rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.2s,
+                background-color 0.2s;
+
+            cursor: pointer;
+
+            flex: 1;
+        }
+
+
+        .menu-bloco:hover {
+
+            transform:
+                translateY(-3px);
+
+            background-color: #4a352b;
+        }
+
+
+        .menu-bloco h2 {
+
+            font-family: Georgia, serif;
+
+            font-size: 24px;
+
+            margin: 0 0 20px 0;
+
+            font-weight: normal;
+        }
+
+
+        /* ==========================================
+           ÍCONES
+        ========================================== */
+
+        .icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            fill: none;
+
+            stroke: #eadecc;
+
+            stroke-width: 1.5;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        /* ==========================================
+           RESPONSIVIDADE
+        ========================================== */
+
+        @media (max-width: 900px) {
+
+            .dashboard-container {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="dashboard-container">
+
+
+        <!-- ==========================================
+             COLUNA 1
+        ========================================== -->
+
+        <div class="card-resultado">
+
+            <div>
+
+                <h1>
+                    Novo Casal Criado!
+                </h1>
+
+                <div class="subtitulo">
+                    Informações Registradas
+                </div>
+
+
+                <!-- DADOS -->
+
+                <div class="dados-container">
+
+
+                    <div class="dado-bloco">
+
+                        <span class="rotulo">
+                            Casal
+                        </span>
+
+                        <span
+                            class="valor"
+                            id="exibirNome"
+                        >
+                            ...
+                        </span>
+
+                    </div>
+
+
+                    <div class="dado-bloco">
+
+                        <span class="rotulo">
+                            Data do Casamento
+                        </span>
+
+                        <span
+                            class="valor"
+                            id="exibirData"
+                        >
+                            ...
+                        </span>
+
+                    </div>
+
+
+                    <div class="dado-bloco">
+
+                        <span class="rotulo">
+                            Horário
+                        </span>
+
+                        <span
+                            class="valor"
+                            id="exibirHorario"
+                        >
+                            ...
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- CONTAGEM -->
+
+                <div class="regressiva-container">
+
+                    <div class="regressiva-titulo">
+
+                        Contagem Regressiva
+
+                    </div>
+
+
+                    <div
+                        class="cronometro"
+                        id="cronometroLayout"
+                    >
+
+
+                        <div class="tempo-unidade">
+
+                            <span
+                                class="tempo-numero"
+                                id="contadorDias"
+                            >
+                                00
+                            </span>
+
+                            <span class="tempo-rotulo">
+                                Dias
+                            </span>
+
+                        </div>
+
+
+                        <div class="tempo-unidade">
+
+                            <span
+                                class="tempo-numero"
+                                id="contadorHoras"
+                            >
+                                00
+                            </span>
+
+                            <span class="tempo-rotulo">
+                                Horas
+                            </span>
+
+                        </div>
+
+
+                        <div class="tempo-unidade">
+
+                            <span
+                                class="tempo-numero"
+                                id="contadorMinutos"
+                            >
+                                00
+                            </span>
+
+                            <span class="tempo-rotulo">
+                                Minutos
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTÕES -->
+
+            <div>
+
+                <button
+                    class="btn-compartilhar"
+                    onclick="compartilharWhatsApp()"
+                >
+                    💬 Compartilhar no WhatsApp
+                </button>
+
+
+                <button
+                    class="btn-voltar"
+                    onclick="editarInformacoes()"
+                >
+                    Editar Informações
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+             COLUNA 2
+        ========================================== -->
+
+        <div class="coluna-modulos">
+
+
+            <a
+                href="checklist.html"
+                class="menu-bloco"
+            >
+
+                <h2>
+                    Check List
+                </h2>
+
+
+                <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                >
+
+                    <rect
+                        x="3"
+                        y="4"
+                        width="4"
+                        height="4"
+                        rx="1"
+                    />
+
+                    <rect
+                        x="3"
+                        y="14"
+                        width="4"
+                        height="4"
+                        rx="1"
+                    />
+
+                    <line
+                        x1="10"
+                        y1="6"
+                        x2="21"
+                        y2="6"
+                    />
+
+                    <line
+                        x1="10"
+                        y1="16"
+                        x2="21"
+                        y2="16"
+                    />
+
+                </svg>
+
+            </a>
+
+
+
+            <a
+                href="convidados.html"
+                class="menu-bloco"
+            >
+
+                <h2>
+                    Lista de Convidados
+                </h2>
+
+
+                <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                    />
+
+                    <circle
+                        cx="12"
+                        cy="11"
+                        r="2"
+                    />
+
+                    <path
+                        d="M8 17c0-2 2-3 4-3s4 1 4 3"
+                    />
+
+                </svg>
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- ==========================================
+             COLUNA 3
+        ========================================== -->
+
+        <div class="coluna-modulos">
+
+
+            <a
+                href="cronograma.html"
+                class="menu-bloco"
+            >
+
+                <h2>
+                    Cronograma do Dia
+                </h2>
+
+
+                <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                >
+
+                    <line
+                        x1="4"
+                        y1="12"
+                        x2="20"
+                        y2="12"
+                        stroke-width="2"
+                    />
+
+                    <circle
+                        cx="7"
+                        cy="12"
+                        r="3"
+                        fill="#3b2a22"
+                    />
+
+                    <circle
+                        cx="17"
+                        cy="12"
+                        r="3"
+                        fill="#3b2a22"
+                    />
+
+                </svg>
+
+            </a>
+
+
+
+            <a
+                href="fornecedores.html"
+                class="menu-bloco"
+            >
+
+                <h2>
+                    Fornecedores
+                </h2>
+
+
+                <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        d="M12 2L2 7l10 5 10-5-10-5z"
+                    />
+
+                    <path
+                        d="M2 17l10 5 10-5"
+                    />
+
+                </svg>
+
+            </a>
+
+
+
+            <a
+                href="chat.html"
+                class="menu-bloco"
+            >
+
+                <h2>
+                    Chat On
+                </h2>
+
+
+                <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                    />
+
+                </svg>
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+        // ==========================================
+        // VARIÁVEIS
+        // ==========================================
+
+        let nomeSalvo = "";
+
+        let dataSalva = "";
+
+        let horarioSalvo = "";
+
+        let diasFaltandoGlobal = 0;
+
+
+
+        // ==========================================
+        // CARREGAR OS DADOS
+        // ==========================================
+
+        window.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                nomeSalvo =
+                    localStorage.getItem(
+                        "casal_nome"
+                    );
+
+                dataSalva =
+                    localStorage.getItem(
+                        "casal_data"
+                    );
+
+                horarioSalvo =
+                    localStorage.getItem(
+                        "casal_horario"
+                    );
+
+
+                // Verifica se os dados existem
+
+                if (
+                    nomeSalvo &&
+                    dataSalva &&
+                    horarioSalvo
+                ) {
+
+
+                    // ==================================
+                    // MOSTRA OS DADOS NA TELA
+                    // ==================================
+
+                    document
+                        .getElementById("exibirNome")
+                        .textContent = nomeSalvo;
+
+
+                    document
+                        .getElementById("exibirData")
+                        .textContent = dataSalva;
+
+
+                    document
+                        .getElementById("exibirHorario")
+                        .textContent = horarioSalvo;
+
+
+                    // Inicia contagem
+
+                    atualizarCronometro();
+
+
+                    // Atualiza a cada minuto
+
+                    setInterval(
+                        atualizarCronometro,
+                        60000
+                    );
+
+
+                } else {
+
+                    alert(
+                        "Nenhum dado encontrado. Voltando para o formulário."
+                    );
+
+                    window.location.href =
+                        "index.html";
+                }
+
+            }
+        );
+
+
+
+        // ==========================================
+        // CONTAGEM REGRESSIVA
+        // ==========================================
+
+        function atualizarCronometro() {
+
+            if (
+                !dataSalva ||
+                !horarioSalvo
+            ) {
+
+                return;
+            }
+
+
+            const partesData =
+                dataSalva.split("/");
+
+
+            const partesHorario =
+                horarioSalvo.split(":");
+
+
+            if (
+                partesData.length !== 3 ||
+                partesHorario.length !== 2
+            ) {
+
+                return;
+            }
+
+
+            const dia =
+                parseInt(
+                    partesData[0],
+                    10
+                );
+
+
+            const mes =
+                parseInt(
+                    partesData[1],
+                    10
+                ) - 1;
+
+
+            const ano =
+                parseInt(
+                    partesData[2],
+                    10
+                );
+
+
+            const hora =
+                parseInt(
+                    partesHorario[0],
+                    10
+                );
+
+
+            const minuto =
+                parseInt(
+                    partesHorario[1],
+                    10
+                );
+
+
+            const dataEvento =
+                new Date(
+                    ano,
+                    mes,
+                    dia,
+                    hora,
+                    minuto,
+                    0
+                );
+
+
+            const agora =
+                new Date();
+
+
+            const diferencaTempo =
+                dataEvento - agora;
+
+
+
+            // ==================================
+            // SE O CASAMENTO JÁ CHEGOU
+            // ==================================
+
+            if (
+                diferencaTempo <= 0
+            ) {
+
+                document
+                    .getElementById(
+                        "cronometroLayout"
+                    )
+                    .innerHTML =
+                    `
+                    <div
+                        style="
+                        width:100%;
+                        text-align:center;
+                        font-size:18px;
+                        "
+                    >
+                        O grande dia chegou! 🎉
+                    </div>
+                    `;
+
+
+                diasFaltandoGlobal = 0;
+
+                return;
+            }
+
+
+
+            // ==================================
+            // CALCULA TEMPO
+            // ==================================
+
+            const dias =
+                Math.floor(
+                    diferencaTempo /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const horas =
+                Math.floor(
+                    (
+                        diferencaTempo %
+                        (1000 * 60 * 60 * 24)
+                    ) /
+                    (1000 * 60 * 60)
+                );
+
+
+            const minutos =
+                Math.floor(
+                    (
+                        diferencaTempo %
+                        (1000 * 60 * 60)
+                    ) /
+                    (1000 * 60)
+                );
+
+
+            diasFaltandoGlobal =
+                dias;
+
+
+
+            // ==================================
+            // MOSTRA NA TELA
+            // ==================================
+
+            document
+                .getElementById(
+                    "contadorDias"
+                )
+                .textContent =
+                String(dias)
+                    .padStart(2, "0");
+
+
+            document
+                .getElementById(
+                    "contadorHoras"
+                )
+                .textContent =
+                String(horas)
+                    .padStart(2, "0");
+
+
+            document
+                .getElementById(
+                    "contadorMinutos"
+                )
+                .textContent =
+                String(minutos)
+                    .padStart(2, "0");
+
+        }
+
+
+
+        // ==========================================
+        // COMPARTILHAR NO WHATSAPP
+        // ==========================================
+
+        function compartilharWhatsApp() {
+
+            let mensagem =
+                "*Grande Notícia!* 🔔\n\n";
+
+
+            mensagem +=
+                "Os dados do casal *" +
+                nomeSalvo +
+                "* foram gerados com sucesso!\n";
+
+
+            mensagem +=
+                "🗓️ *Data:* " +
+                dataSalva +
+                "\n";
+
+
+            mensagem +=
+                "⏰ *Horário:* " +
+                horarioSalvo +
+                "\n\n";
+
+
+            if (
+                diasFaltandoGlobal > 0
+            ) {
+
+                mensagem +=
+                    "Faltam apenas *" +
+                    diasFaltandoGlobal +
+                    " dias* para essa celebração especial! ✨";
+
+            } else {
+
+                mensagem +=
+                    "Chegou o momento de comemorar! 🎉";
+            }
+
+
+            const mensagemCodificada =
+                encodeURIComponent(
+                    mensagem
+                );
+
+
+            const urlWhatsApp =
+                "https://wa.me/?text=" +
+                mensagemCodificada;
+
+
+            window.open(
+                urlWhatsApp,
+                "_blank"
+            );
+
+        }
+
+
+
+        // ==========================================
+        // EDITAR INFORMAÇÕES
+        // ==========================================
+
+        function editarInformacoes() {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
