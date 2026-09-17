@@ -3,180 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cronograma Digital de Casamento Real-Time</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/imagens/Logotipo Monograma Elegante Preto.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="imagens/Logotipo Monograma Elegante Preto.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="imagens/Logotipo Monograma Elegante Preto.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Ally</title>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        wedding: {
-                            50: '#FAF8F5',
-                            100: '#F4EFEA',
-                            200: '#E7DDD3',
-                            300: '#D5C3B3',
-                            400: '#BFA590',
-                            500: '#AA8870',
-                            600: '#8F6E57',
-                            700: '#725542',
-                            800: '#5A4335',
-                            900: '#3D2D24',
-                        },
-                        rosegold: {
-                            100: '#FDF1EE',
-                            200: '#F8DED7',
-                            500: '#C88A78',
-                            600: '#B07160',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #FAF8F5;
-            color: #3D2D24;
+            background-color: #f7f5f2;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+
+            display: flex;
+            flex-direction: column; /* Força os elementos a ficarem empilhados (Topo -> Baixo) */
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100vh;
+            margin: 0;
+            padding: 30px 20px;
+
+            box-sizing: border-box;
         }
-        .font-cormorant {
-            font-family: 'Cormorant Garamond', serif;
+
+        /* Estilo do bloco da logo (Header) */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 25px; /* Espaço entre a logo e o formulário */
+            width: 100%;
         }
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-in-out;
+
+        .brand-logo-img {
+            width: 50px;
+            height: auto;
+            display: block;
+            margin: 0 auto 8px; /* Centraliza a imagem da logo */
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .brand-title {
+            font-family: Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #382a23;
+            margin: 0;
+            line-height: 1;
         }
-        .progress-bar-fill {
-            transition: width 0.5s ease-in-out;
+
+        .brand-tagline {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #725a4d;
+            margin-top: 6px;
+        }
+
+        /* Estilo do Card do Formulário */
+        .card-formulario {
+            background-color: #3b2a22;
+
+            width: 100%;
+            max-width: 625px;
+
+            padding: 50px;
+
+            border-radius: 30px;
+
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+            box-sizing: border-box;
+
+            color: #ffffff;
+        }
+
+        .card-formulario h1 {
+            font-family: Georgia, serif;
+
+            font-size: 34px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            margin-top: 0;
+            margin-bottom: 38px;
+        }
+
+        .campo-grupo {
+            margin-bottom: 25px;
+        }
+
+        .campo-grupo label {
+            display: block;
+
+            font-size: 17px;
+
+            margin-bottom: 10px;
+
+            font-weight: 500;
+        }
+
+        .campo-grupo input {
+            width: 100%;
+
+            padding: 16px;
+
+            background-color: transparent;
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            border-radius: 10px;
+
+            color: #ffffff;
+
+            font-size: 18px;
+
+            box-sizing: border-box;
+
+            outline: none;
+
+            transition: border-color 0.2s;
+        }
+
+        .campo-grupo input:focus {
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .campo-grupo input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-enviar {
+            width: 100%;
+
+            padding: 17px;
+
+            background-color: #f7f5f2;
+
+            border: none;
+
+            border-radius: 30px;
+
+            color: #3b2a22;
+
+            font-size: 20px;
+
+            font-weight: 500;
+
+            cursor: pointer;
+
+            margin-top: 15px;
+            margin-bottom: 18px;
+
+            transition: 0.2s;
+        }
+
+        .btn-enviar:hover {
+            background-color: #eadecc;
+
+            transform: translateY(-1px);
+        }
+
+        .rodape-texto {
+            font-size: 12px;
+
+            color: rgba(255, 255, 255, 0.6);
+
+            text-align: center;
+
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .card-formulario {
+                padding: 30px 25px;
+            }
+
+            .card-formulario h1 {
+                font-size: 27px;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen pb-12 antialiased selection:bg-wedding-200 selection:text-wedding-900">
 
-    <div class="max-w-md mx-auto px-4 py-6 sm:max-w-xl">
-        <!-- Header -->
-        <header class="text-center mb-6">
-            <div class="inline-flex items-center justify-center space-x-2 mb-1">
-                <span class="text-wedding-500 text-sm tracking-widest uppercase font-semibold">Cerimonial & Assessoria</span>
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-cormorant font-bold text-wedding-900 tracking-tight">
-                Cronograma do Casamento
-            </h1>
-            <p class="text-xs text-wedding-600 mt-1">Acompanhamento em tempo real do dia do evento</p>
-        </header>
+<body>
 
-        <!-- Progress Indicator Card -->
-        <section class="bg-white rounded-2xl p-5 shadow-sm border border-wedding-100 mb-6 transition-all duration-300 hover:shadow-md">
-            <div class="flex items-center justify-between mb-3">
-                <div>
-                    <span class="text-xs font-semibold text-wedding-500 uppercase tracking-wider">Progresso do Evento</span>
-                    <h2 id="progress-summary-text" class="text-lg font-bold text-wedding-800">0 de 0 concluídos</h2>
-                </div>
-                <div class="text-right">
-                    <span id="progress-percentage-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-wedding-100 text-wedding-800 transition-all duration-300">
-                        0%
-                    </span>
-                </div>
-            </div>
-            <!-- Progress Bar Track -->
-            <div class="w-full bg-wedding-100 rounded-full h-3 overflow-hidden p-0.5">
-                <div id="progress-bar" class="progress-bar-fill bg-gradient-to-r from-wedding-400 to-wedding-600 h-2 rounded-full w-0"></div>
-            </div>
-        </section>
+    <!-- LOGO CENTRALIZADA NO TOPO -->
+    <header class="brand-header">
+        <img src="imagens/Logotipo Monograma Elegante Preto.png" class="brand-logo-img" alt="Logo Ally">
+        <h1 class="brand-title">Ally</h1>
+        <p class="brand-tagline">CRONOGRAMA DE CASAMENTO</p>
+    </header>
 
-        <!-- Quick Cascade Delay Buttons (Efeito Impacto) -->
-        <section class="bg-wedding-100/60 rounded-2xl p-4 border border-wedding-200/60 mb-6">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-wedding-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-wedding-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    Ajuste em Cascata (Atraso)
-                </span>
-                <span class="text-[10px] text-wedding-500">Aplica aos pendentes</span>
-            </div>
-            <div class="grid grid-cols-3 gap-2">
-                <button onclick="applyDelay(5)" class="py-2 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
-                    <span>+5 min</span>
-                </button>
-                <button onclick="applyDelay(15)" class="py-2 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
-                    <span>+15 min</span>
-                </button>
-                <button onclick="applyDelay(30)" class="py-2 px-3 bg-white hover:bg-wedding-50 text-wedding-800 font-semibold text-xs rounded-xl shadow-sm border border-wedding-200 transition-all active:scale-95 flex items-center justify-center gap-1">
-                    <span>+30 min</span>
-                </button>
-            </div>
-        </section>
+    <!-- FORMULÁRIO -->
+    <div class="card-formulario">
 
-        <!-- Dynamic View Filters -->
-        <section class="flex items-center justify-between bg-white rounded-xl p-1.5 border border-wedding-100 shadow-sm mb-5">
-            <button id="filter-all" onclick="setFilter('all')" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all text-wedding-900 bg-wedding-100 font-semibold">
-                Ver Tudo
-            </button>
-            <button id="filter-pending" onclick="setFilter('pending')" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all text-wedding-600 hover:text-wedding-900">
-                Pendentes
-            </button>
-            <button id="filter-completed" onclick="setFilter('completed')" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all text-wedding-600 hover:text-wedding-900">
-                Concluídos
-            </button>
-        </section>
+        <h1>Coloque os dados do casal:</h1>
 
-        <!-- Add Milestone Form Toggle / Container -->
-        <section class="mb-6">
-            <button id="toggle-add-form-btn" onclick="toggleAddForm()" class="w-full py-3 px-4 bg-wedding-800 hover:bg-wedding-900 text-white font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 active:scale-[0.99]">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-                <span>Novo Marco</span>
-            </button>
+        <div class="campo-grupo">
+            <label for="nomeCasal">
+                Primeiro nome do casal
+            </label>
+            <input
+                type="text"
+                id="nomeCasal"
+                autocomplete="off"
+                placeholder="Digite o nome"
+                required
+            >
+        </div>
 
-            <form id="add-milestone-form" onsubmit="handleAddMilestone(event)" class="hidden bg-white p-4 rounded-2xl border border-wedding-200 shadow-md mt-3 animate-fade-in space-y-3">
-                <h3 class="text-sm font-bold text-wedding-800 border-b border-wedding-100 pb-2">Adicionar Novo Marco</h3>
-                <div>
-                    <label for="milestone-time" class="block text-xs font-medium text-wedding-700 mb-1">Horário</label>
-                    <input type="time" id="milestone-time" required class="w-full px-3 py-2 text-sm border border-wedding-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wedding-400 bg-wedding-50">
-                </div>
-                <div>
-                    <label for="milestone-title" class="block text-xs font-medium text-wedding-700 mb-1">Descrição do Marco</label>
-                    <input type="text" id="milestone-title" placeholder="Ex: Entrada dos Padrinhos" required class="w-full px-3 py-2 text-sm border border-wedding-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wedding-400 bg-wedding-50">
-                </div>
-                <div class="flex items-center gap-2 pt-1">
-                    <button type="submit" class="flex-1 py-2 bg-wedding-700 hover:bg-wedding-800 text-white text-xs font-semibold rounded-lg transition-all">
-                        Salvar
-                    </button>
-                    <button type="button" onclick="toggleAddForm(false)" class="py-2 px-4 bg-wedding-100 hover:bg-wedding-200 text-wedding-800 text-xs font-semibold rounded-lg transition-all">
-                        Cancelar
-                    </button>
-                </div>
-            </form>
-        </section>
+        <div class="campo-grupo">
+            <label for="dataCasamento">
+                Data do casamento
+            </label>
+            <input
+                type="text"
+                id="dataCasamento"
+                placeholder="DD/MM/AAAA"
+                maxlength="10"
+                autocomplete="off"
+                required
+            >
+        </div>
 
-        <!-- Milestones List -->
-        <main id="milestones-container" class="space-y-3 min-h-[160px]">
-            <!-- Rendered via app.js -->
-        </main>
+        <div class="campo-grupo">
+            <label for="horarioCasamento">
+                Horário
+            </label>
+            <input
+                type="text"
+                id="horarioCasamento"
+                placeholder="HH:MM"
+                maxlength="5"
+                autocomplete="off"
+                required
+            >
+        </div>
 
-        <!-- Footer / Reset Option -->
-        <footer class="mt-10 text-center border-t border-wedding-200/60 pt-6">
-            <button onclick="resetToDefaults()" class="text-xs text-wedding-500 hover:text-wedding-700 underline transition-colors">
-                Restaurar cronograma inicial de exemplo
-            </button>
-        </footer>
+        <button
+            class="btn-enviar"
+            onclick="salvarEAvancar()"
+        >
+            Novo Casal
+        </button>
+
+        <p class="rodape-texto">
+            Bem-vindo(a) ao Ally, seu espaço para organizar cada detalhe de um dos momentos mais especiais!
+        </p>
+
     </div>
 
-    <script src="app.js"></script>
+    <script>
+
+        // ==========================================
+        // MÁSCARA DA DATA
+        // ==========================================
+
+        document
+            .getElementById("dataCasamento")
+            .addEventListener("input", function (e) {
+
+                let valor = e.target.value
+                    .replace(/\D/g, "")
+                    .slice(0, 8);
+
+                if (valor.length >= 5) {
+                    valor =
+                        valor.slice(0, 2) +
+                        "/" +
+                        valor.slice(2, 4) +
+                        "/" +
+                        valor.slice(4);
+                } else if (valor.length >= 3) {
+                    valor =
+                        valor.slice(0, 2) +
+                        "/" +
+                        valor.slice(2);
+                }
+
+                e.target.value = valor;
+            });
+
+
+        // ==========================================
+        // MÁSCARA DO HORÁRIO
+        // ==========================================
+
+        document
+            .getElementById("horarioCasamento")
+            .addEventListener("input", function (e) {
+
+                let valor = e.target.value
+                    .replace(/\D/g, "")
+                    .slice(0, 4);
+
+                if (valor.length >= 3) {
+                    valor =
+                        valor.slice(0, 2) +
+                        ":" +
+                        valor.slice(2);
+                }
+
+                e.target.value = valor;
+            });
+
+
+        // ==========================================
+        // SALVAR OS DADOS
+        // ==========================================
+
+        function salvarEAvancar() {
+
+            const nome =
+                document
+                    .getElementById("nomeCasal")
+                    .value
+                    .trim();
+
+            const data =
+                document
+                    .getElementById("dataCasamento")
+                    .value
+                    .trim();
+
+            const horario =
+                document
+                    .getElementById("horarioCasamento")
+                    .value
+                    .trim();
+
+
+            // Verifica se os campos estão preenchidos
+
+            if (
+                !nome ||
+                data.length !== 10 ||
+                horario.length !== 5
+            ) {
+
+                alert(
+                    "Por favor, preencha todos os campos corretamente."
+                );
+
+                return;
+            }
+
+
+            // ==========================================
+            // SALVA NO LOCALSTORAGE
+            // ==========================================
+
+            localStorage.setItem(
+                "casal_nome",
+                nome
+            );
+
+            localStorage.setItem(
+                "casal_data",
+                data
+            );
+
+            localStorage.setItem(
+                "casal_horario",
+                horario
+            );
+
+
+            // ==========================================
+            // VAI PARA A PRÓXIMA PÁGINA
+            // ==========================================
+
+            window.location.href =
+                "proxima_pagina.html";
+        }
+
+    </script>
+
 </body>
 </html>
