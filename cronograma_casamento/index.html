@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Coloque os dados do casal</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/imagens/Logotipo Monograma Elegante Preto.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="imagens/Logotipo Monograma Elegante Preto.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="imagens/Logotipo Monograma Elegante Preto.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Ally</title>
 
     <style>
         body {
@@ -12,16 +15,49 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
 
             display: flex;
+            flex-direction: column; /* Força os elementos a ficarem empilhados (Topo -> Baixo) */
             justify-content: center;
             align-items: center;
 
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 30px 20px;
 
             box-sizing: border-box;
         }
 
+        /* Estilo do bloco da logo (Header) */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 25px; /* Espaço entre a logo e o formulário */
+            width: 100%;
+        }
+
+        .brand-logo-img {
+            width: 50px;
+            height: auto;
+            display: block;
+            margin: 0 auto 8px; /* Centraliza a imagem da logo */
+        }
+
+        .brand-title {
+            font-family: Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #382a23;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .brand-tagline {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #725a4d;
+            margin-top: 6px;
+        }
+
+        /* Estilo do Card do Formulário */
         .card-formulario {
             background-color: #3b2a22;
 
@@ -151,16 +187,22 @@
 
 <body>
 
+    <!-- LOGO CENTRALIZADA NO TOPO -->
+    <header class="brand-header">
+        <img src="imagens/Logotipo Monograma Elegante Preto.png" class="brand-logo-img" alt="Logo Ally">
+        <h1 class="brand-title">Ally</h1>
+        <p class="brand-tagline">CRONOGRAMA DE CASAMENTO</p>
+    </header>
+
+    <!-- FORMULÁRIO -->
     <div class="card-formulario">
 
         <h1>Coloque os dados do casal:</h1>
 
         <div class="campo-grupo">
-
             <label for="nomeCasal">
                 Primeiro nome do casal
             </label>
-
             <input
                 type="text"
                 id="nomeCasal"
@@ -168,15 +210,12 @@
                 placeholder="Digite o nome"
                 required
             >
-
         </div>
 
         <div class="campo-grupo">
-
             <label for="dataCasamento">
                 Data do casamento
             </label>
-
             <input
                 type="text"
                 id="dataCasamento"
@@ -185,15 +224,12 @@
                 autocomplete="off"
                 required
             >
-
         </div>
 
         <div class="campo-grupo">
-
             <label for="horarioCasamento">
                 Horário
             </label>
-
             <input
                 type="text"
                 id="horarioCasamento"
@@ -202,7 +238,6 @@
                 autocomplete="off"
                 required
             >
-
         </div>
 
         <button
@@ -213,12 +248,10 @@
         </button>
 
         <p class="rodape-texto">
-            Seu nome de perfil no Canva será compartilhado.
-            Nunca envie senhas.
+            Bem-vindo(a) ao Ally, seu espaço para organizar cada detalhe de um dos momentos mais especiais!
         </p>
 
     </div>
-
 
     <script>
 
@@ -235,25 +268,20 @@
                     .slice(0, 8);
 
                 if (valor.length >= 5) {
-
                     valor =
                         valor.slice(0, 2) +
                         "/" +
                         valor.slice(2, 4) +
                         "/" +
                         valor.slice(4);
-
                 } else if (valor.length >= 3) {
-
                     valor =
                         valor.slice(0, 2) +
                         "/" +
                         valor.slice(2);
-
                 }
 
                 e.target.value = valor;
-
             });
 
 
@@ -270,16 +298,13 @@
                     .slice(0, 4);
 
                 if (valor.length >= 3) {
-
                     valor =
                         valor.slice(0, 2) +
                         ":" +
                         valor.slice(2);
-
                 }
 
                 e.target.value = valor;
-
             });
 
 
